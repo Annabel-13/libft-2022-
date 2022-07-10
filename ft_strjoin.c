@@ -15,11 +15,10 @@
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*string;
-	size_t	new_len;
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	if (!s1)
 	{
@@ -28,21 +27,15 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	if (!s1 || !s2)
 		return (NULL);
-	new_len = ft_strlen(s1) + ft_strlen(s2);
-	string = (char *) malloc(sizeof(char) * new_len + 1);
+	string = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (string == NULL)
 		return (NULL);
-	while (s1[i] != '\0')
-	{
-		string[i] = s1[i];
-		i++;
-	}
+	if (s1)
+		while (s1[++i] != '\0')
+			string[i] = s1[i];
 	while (s2[j] != '\0')
-	{
-		string[i + j] = s2[j];
-		j++;
-	}
-	string[i + j] = '\0';
+		string[i++] = s2[j++];
+	string[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	free(s1);
 	return (string);
 }
